@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import { noticeReducer } from "./noticeReducer";
+import { newsReducer } from "./newsReducer";
 
 
 const reducers = combineReducers({
-    allNotices : noticeReducer
+    allNews : newsReducer
 });
 
 export default reducers;
