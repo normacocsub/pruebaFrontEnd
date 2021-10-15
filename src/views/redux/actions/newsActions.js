@@ -7,6 +7,7 @@ export const getNews = (onSuccess) => ({
         method: 'GET',
         headers: ActionTypes.TOKEN,
         url: ActionTypes.API_ROUTE_NEWS,
+        data: [],
         success: (response) => (setNews(response)),
         postProcessSuccess:onSuccess,
         api: 'News'

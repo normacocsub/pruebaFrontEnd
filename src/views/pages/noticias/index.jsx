@@ -13,6 +13,7 @@ import { getToken } from "../../redux/actions/universalActions";
 import { getContries } from "../../redux/actions/universalActions";
 import { getEstados } from "../../redux/actions/universalActions";
 import { getCiudades } from "../../redux/actions/universalActions";
+import { getTime } from "../../redux/actions/watherActions";
 
  
 const Noticias = () => {
@@ -23,11 +24,15 @@ const Noticias = () => {
     const [estados, setEstados] = useState([]);
     const [ciudades, setCiudades] = useState([]);
     const [ SelectPais, setPais] = useState("");
+    const [time, seTime] = useState({});
+    const [ciudadSelect, setCiudadSelect] = useState("");
+
+    useEffect(() =>{ dispatch(getContries((res) => { setCountries(res)})); }, [])
     const OnClickButton = () => {
         
-        dispatch(getNews((res) => { SetNews(res) }));
+        //dispatch(getNews((res) => { SetNews(res) }));
         dispatch(getToken((res) => { SetToken(res)} ));
-        dispatch(getContries((res) => { setCountries(res)}));
+        dispatch(getTime((res) => {seTime(res)}, ciudadSelect))
     }
 
     const SetCountries =  (dato) =>{
@@ -53,6 +58,13 @@ const Noticias = () => {
     const onChangeEstates = (value) => {
         dispatch(getCiudades((res) => {setCiudades(res)}, value))
     }
+
+    const onChangeCity = (value) => {
+        setCiudadSelect(value);
+    }
+
+
+
     console.log(ciudades);
 
     return (
@@ -115,7 +127,7 @@ const Noticias = () => {
                                 //value={this.state.age}
                                 //onChange={this.handleChange}
                                 style = {{minWidth: (150)}}
-                                 
+                                onChange = {(value) => {onChangeCity(value.target.value)}}
                             >
                                 <MenuItem value="">
                                 <em>None</em>

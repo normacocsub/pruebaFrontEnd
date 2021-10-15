@@ -28,16 +28,30 @@ export const apiMiddleware =
                 axios.defaults.headers.common["Accept"] = "application/json";
                 axios.defaults.headers.common["Authorization"] = 'Bearer '+ TOKEN_UNIVERSAL;
             }
-            
 
+            if(api == 'Wheater')
+            {
+                BASE_URL =   ActionTypes.API_OPEN_WHEATHER + url;
+                axios.defaults.headers.common["Accept"] = "application/json";
+                axios.defaults.headers.common["Access-Control-Allow-Origin"] = "http://localhost:3000";
+            }
+    
             
+            
+            if(method)
+            {
                 axios({
                     method,
                     url: BASE_URL,
                     data: data != undefined ? data : null,
+                    headers: {
+                        'Access-Control-Allow-Origin' : '*',
+                        'Access-Control-Allow-Methods' : 'GET, POST, PUT, DELETE, OPTIONS',
+                        'Access-Control-Allow-Headers' : 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+                        'Access-Control-Allow-Credentials' : true,
+                    }
                 })
                     .then((response) => {
-                        if (success) dispatch(success(response.data));
 					    if (postProcessSuccess) postProcessSuccess(response.data);
                     })
                     .catch((err) => {
@@ -47,5 +61,5 @@ export const apiMiddleware =
                             }
                         
                     });
-            
+            }
         }
