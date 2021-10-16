@@ -2,11 +2,11 @@
 import { ActionTypes } from "../constants/action-types";
 
 
-export const getNews = (onSuccess) => ({
+export const getNews = (onSuccess, country) => ({
     payload: {
         method: 'GET',
         headers: ActionTypes.TOKEN,
-        url: ActionTypes.API_ROUTE_NEWS,
+        url: country,
         data: [],
         success: (response) => (setNews(response)),
         postProcessSuccess:onSuccess,

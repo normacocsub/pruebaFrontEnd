@@ -14,6 +14,10 @@ import { getContries } from "../../redux/actions/universalActions";
 import { getEstados } from "../../redux/actions/universalActions";
 import { getCiudades } from "../../redux/actions/universalActions";
 import { getTime } from "../../redux/actions/watherActions";
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 
  
 const Noticias = () => {
@@ -24,15 +28,19 @@ const Noticias = () => {
     const [estados, setEstados] = useState([]);
     const [ciudades, setCiudades] = useState([]);
     const [ SelectPais, setPais] = useState("");
-    const [time, seTime] = useState({});
+    const [time, seTime] = useState(false);
     const [ciudadSelect, setCiudadSelect] = useState("");
 
-    useEffect(() =>{ dispatch(getContries((res) => { setCountries(res)})); }, [])
+    useEffect(() =>{ 
+        dispatch(getToken((res) => { SetToken(res)} ));
+        dispatch(getContries((res) => { setCountries(res)}));
+                     
+                    }, [])
     const OnClickButton = () => {
         
-        //dispatch(getNews((res) => { SetNews(res) }));
-        dispatch(getToken((res) => { SetToken(res)} ));
-        dispatch(getTime((res) => {seTime(res)}, ciudadSelect))
+        dispatch(getNews((res) => { SetNews(res) }, SelectPais));
+        
+        dispatch(getTime((res) => {seTime(res)}, ciudadSelect, SelectPais))
     }
 
     const SetCountries =  (dato) =>{
@@ -52,7 +60,8 @@ const Noticias = () => {
     }
 
     const onChangeCountries = (value) =>{
-        dispatch(getEstados((res) => {setEstados(res)}, value))
+        dispatch(getEstados((res) => {setEstados(res)}, value.country_name))
+        setPais(value.country_short_name);
     }
 
     const onChangeEstates = (value) => {
@@ -89,7 +98,7 @@ const Noticias = () => {
                                 </MenuItem>
                                 {
                                     countries?.map(value => (
-                                        <MenuItem  value={value.country_name}>{value.country_name}</MenuItem>
+                                        <MenuItem  value={value}>{value.country_name}</MenuItem>
                                     )
                                         
                                     )
@@ -99,7 +108,7 @@ const Noticias = () => {
                             </div>
                             <div>
                             <FormControl >
-                            <InputLabel style ={{marginLeft: ('30%')}}>Estados</InputLabel>
+                            <InputLabel style ={{marginLeft: ('10%')}}>Estados</InputLabel>
                             <Select
                                 //value={this.state.age}
                                 //onChange={this.handleChange}
@@ -122,7 +131,7 @@ const Noticias = () => {
 
                             <div>
                             <FormControl >
-                            <InputLabel style ={{marginLeft: ('30%')}}>Ciudades</InputLabel>
+                            <InputLabel style ={{marginLeft: ('10%')}}>Ciudades</InputLabel>
                             <Select
                                 //value={this.state.age}
                                 //onChange={this.handleChange}
@@ -149,7 +158,38 @@ const Noticias = () => {
                     </form>
                
             </div>
-           
+                                
+            <div>
+                {
+                    time?(
+                        <div style={{paddingTop: ('8%'), paddingLeft: ('15%'), maxWidth: (350), minHeight: (150), marginTop: (-150)}}>
+                            
+                            
+
+                            <Card style={{boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.3)", backgroundColor: "#fafafa"}}>
+                                <CardContent>
+                                    <Grid container  spacing={16}>
+                                        <div>
+                                            <h4 >{time.data[0].weather.description} - {time.data[0].city_name}</h4>
+                                            <h1>{time.data[0].temp}°C </h1>
+                                            <h6>{time.data[0].ob_time}</h6>
+                                        </div>
+                                        <div>
+                                            <img src={`https://www.weatherbit.io/static/img/icons/${time.data[0].weather.icon}.png`}></img>
+                                        </div>
+                                    </Grid>
+                                </CardContent>
+
+                            </Card>
+                        </div>   
+                    ):
+                    (
+                        <div>
+                            
+                        </div>
+                    )
+                }
+            </div>
             
             <Noticia  news={news}/>
         </div>

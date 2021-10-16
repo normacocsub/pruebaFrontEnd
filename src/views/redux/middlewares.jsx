@@ -5,35 +5,42 @@ export const apiMiddleware =
         ({ dispatch, getState }) =>
         (next) =>
         (action) => {
-            var BASE_URL = 'https://newsapi.org/v2/top-headlines?country=co';
+            let BASE_URL = 'https://newsapi.org/v2/top-headlines?country=';
+
+            let heders = {}
             
             const { url, method, success, data, postProcessSuccess, postProcessError, api } =
 			action.payload;
 
             if(api == 'News')
             {
-                axios.defaults.headers.common["X-Api-Key"] = ActionTypes.TOKEN;
+                BASE_URL = BASE_URL +  url; 
+                heders = {"X-Api-Key": ActionTypes.TOKEN,  "Content-Type": "application/x-www-form-urlencoded"}
+                //axios.defaults.headers.common["X-Api-Key"] = ActionTypes.TOKEN;
             }
             if(api == 'UniversalFirst')
             {
                 BASE_URL = ActionTypes.API_ROUTE_UNIVERSAL + url;
-                axios.defaults.headers.common["Accept"] = "application/json";
-                axios.defaults.headers.common["api-token"] = ActionTypes.TOKEN_UNIVERSAL;
-                axios.defaults.headers.common["user-email"] = "normacocsub@gmail.com"
+                heders = {"Accept": "application/json", "api-token": ActionTypes.TOKEN_UNIVERSAL, "user-email": "normacocsub@gmail.com"};
+                //axios.defaults.headers.common["Accept"] = "application/json";
+                //axios.defaults.headers.common["api-token"] = ActionTypes.TOKEN_UNIVERSAL;
+                //axios.defaults.headers.common["user-email"] = "normacocsub@gmail.com"
             }
             if(api == 'UniversalSearchs')
             {
                 const TOKEN_UNIVERSAL = localStorage.getItem('token-universal');
                 BASE_URL = ActionTypes.API_ROUTE_UNIVERSAL + url;
-                axios.defaults.headers.common["Accept"] = "application/json";
-                axios.defaults.headers.common["Authorization"] = 'Bearer '+ TOKEN_UNIVERSAL;
+                heders = {"Accept":"application/json", "Authorization" : `Bearer ${TOKEN_UNIVERSAL}`};
+                //axios.defaults.headers.common["Accept"] = "application/json";
+                //axios.defaults.headers.common["Authorization"] = 'Bearer '+ TOKEN_UNIVERSAL;
             }
 
             if(api == 'Wheater')
             {
                 BASE_URL =   ActionTypes.API_OPEN_WHEATHER + url;
-                axios.defaults.headers.common["Accept"] = "application/json";
-                axios.defaults.headers.common["Access-Control-Allow-Origin"] = "http://localhost:3000";
+                heders = {"Accept": "application/json", "Access-Control-Allow-Origin": "*"};
+                //axios.defaults.headers.common["Accept"] = "application/json";
+                //axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
             }
     
             
@@ -44,12 +51,7 @@ export const apiMiddleware =
                     method,
                     url: BASE_URL,
                     data: data != undefined ? data : null,
-                    headers: {
-                        'Access-Control-Allow-Origin' : '*',
-                        'Access-Control-Allow-Methods' : 'GET, POST, PUT, DELETE, OPTIONS',
-                        'Access-Control-Allow-Headers' : 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-                        'Access-Control-Allow-Credentials' : true,
-                    }
+                    headers: heders
                 })
                     .then((response) => {
 					    if (postProcessSuccess) postProcessSuccess(response.data);

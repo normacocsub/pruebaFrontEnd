@@ -21,7 +21,7 @@ const Noticia = (props) => {
                 <Grid container  justify="center" spacing={40}>
                     {props.news.articles?.map(value => (
                     <Grid key={value} item style={{paddingLeft: (50), paddingTop: (25)}}>
-                        <Card  style = {{maxWidth: (260), maxHeight: (300)}}>
+                        <Card  style = {{maxWidth: (260), maxHeight: (300), boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.3)"}}>
                             <CardActionArea
                             onClick = { (a) => {window.open(value.url)}}
                             >
