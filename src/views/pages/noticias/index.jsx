@@ -18,6 +18,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import { saveHistory } from "../../redux/actions/historyActions";
 
  
 const Noticias = () => {
@@ -41,6 +42,7 @@ const Noticias = () => {
         dispatch(getNews((res) => { SetNews(res) }, SelectPais));
         
         dispatch(getTime((res) => {seTime(res)}, ciudadSelect, SelectPais))
+        dispatch(saveHistory((res) => {console.log('save', res)}, {"city": ciudadSelect, "info":"info"}))
     }
 
     const SetCountries =  (dato) =>{

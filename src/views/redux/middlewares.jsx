@@ -42,6 +42,11 @@ export const apiMiddleware =
                 //axios.defaults.headers.common["Accept"] = "application/json";
                 //axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
             }
+            if(api == 'History')
+            {
+                BASE_URL = url;
+                heders = {"Accept": "application/json", "Access-Control-Allow-Origin": "*"};
+            }
     
             
             

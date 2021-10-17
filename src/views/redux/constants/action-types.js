@@ -6,4 +6,5 @@ export const ActionTypes = {
     API_ROUTE_UNIVERSAL: "https://www.universal-tutorial.com",
     TOKEN_OPEN_WEATHER: "064636af6abf4d59a8a801dc640e76ba",
     API_OPEN_WHEATHER: "http://api.weatherbit.io/v2.0/current?city=",
+    API_HISTORY: "https://localhost:5001/"
 }

@@ -4,7 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import TypoGraphy from '@material-ui/core/Typography'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import { Home, Book, AccountBox } from '@material-ui/icons'
+import { Home, Book, AccountBox, HistoryOutlined } from '@material-ui/icons'
 import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 
@@ -28,6 +28,16 @@ const Navbar = (props) => {
                         <li>
                             <Button startIcon={<Book />} component={Link} to={'/noticias'} variant="text" color="inherit" >
                                 Noticias 
+                            </Button>
+                        </li>    
+                    </TypoGraphy>
+                </ListItemText>
+
+                <ListItemText inset>
+                    <TypoGraphy color="inherit" variant="title">
+                        <li>
+                            <Button startIcon={<HistoryOutlined />} component={Link} to={'/history'} variant="text" color="inherit" >
+                                Historico
                             </Button>
                         </li>    
                     </TypoGraphy>

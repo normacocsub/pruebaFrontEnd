@@ -3,6 +3,7 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import App from '../../../App';
 import HomePage from '../../HomePage';
 import Noticias from '../../pages/noticias';
+import History from '../../pages/history';
 import  Navbar  from '../../components/navbar/Nav';
 import Toolbar from '@material-ui/core/Toolbar'
 import TypoGraphy from '@material-ui/core/Typography'
@@ -29,6 +30,8 @@ const Routes = () => {
                 <Route exact path="/" component={App} />
                 {/*Noticias */}
                 <Route exact path="/noticias" component={Noticias}/>
+                {/* Historial*/}
+                <Route exact path="/history" component={History}/>
             </Switch>
         </BrowserRouter>
         
