@@ -19,6 +19,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { saveHistory } from "../../redux/actions/historyActions";
+import { ActionTypes } from "../../redux/constants/action-types";
 
  
 const Noticias = () => {
@@ -42,7 +43,7 @@ const Noticias = () => {
         dispatch(getNews((res) => { SetNews(res) }, SelectPais));
         
         dispatch(getTime((res) => {seTime(res)}, ciudadSelect, SelectPais))
-        dispatch(saveHistory((res) => {console.log('save', res)}, {"city": ciudadSelect, "info":"info"}))
+        dispatch(saveHistory((res) => {console.log('save', res)}, {"city": ciudadSelect, "info":`ApiWeather: ${ActionTypes.API_OPEN_WHEATHER}${ciudadSelect}, ApiNews: ${ActionTypes.API_ROUTE_NEWS}${SelectPais}, Date: `}))
     }
 
     const SetCountries =  (dato) =>{
