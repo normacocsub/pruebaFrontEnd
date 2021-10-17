@@ -1,3 +1,32 @@
+# Arquitectura de componente y estados
+se renderizan los componentes y estos se trabajan con los custom hooks de react
+
+# Patron redux
+se usa el patron redux con la excepción de que no se pudo hacer uso de los estados globales
+
+# middleware
+se uso el middleware para administrar las peticiones y poder controlar los headers que se envian
+
+
+# apis
+se hizo uso de 3 api's externas universal con la cual se obtienen los distintos paises, weatherbit la cual se usa para obtener datos del tiempo y por ultimo se utiliza la api de noticias en la cual podemos obtener noticias por paises.
+
+se creo una api en la cual se guarda el historial de las consultas.
+
+# endpoins
+se crearon endpoins para obtener los json de dichas consultas por medio de la libreria axios y el uso del patron redux donde estan los actions se ubicaron los endpoins separados por 4 archivos donde cada uno cumple la funcion de hacer peticiones a su respectiva api
+
+# material ui
+como gestor de css se utilizo material ui para facilitar la creación de las interfaces 
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

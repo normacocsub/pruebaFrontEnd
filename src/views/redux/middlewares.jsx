@@ -16,31 +16,23 @@ export const apiMiddleware =
             {
                 BASE_URL = BASE_URL +  url; 
                 heders = {"X-Api-Key": ActionTypes.TOKEN,  "Content-Type": "application/x-www-form-urlencoded"}
-                //axios.defaults.headers.common["X-Api-Key"] = ActionTypes.TOKEN;
             }
             if(api == 'UniversalFirst')
             {
                 BASE_URL = ActionTypes.API_ROUTE_UNIVERSAL + url;
                 heders = {"Accept": "application/json", "api-token": ActionTypes.TOKEN_UNIVERSAL, "user-email": "normacocsub@gmail.com"};
-                //axios.defaults.headers.common["Accept"] = "application/json";
-                //axios.defaults.headers.common["api-token"] = ActionTypes.TOKEN_UNIVERSAL;
-                //axios.defaults.headers.common["user-email"] = "normacocsub@gmail.com"
             }
             if(api == 'UniversalSearchs')
             {
                 const TOKEN_UNIVERSAL = localStorage.getItem('token-universal');
                 BASE_URL = ActionTypes.API_ROUTE_UNIVERSAL + url;
                 heders = {"Accept":"application/json", "Authorization" : `Bearer ${TOKEN_UNIVERSAL}`};
-                //axios.defaults.headers.common["Accept"] = "application/json";
-                //axios.defaults.headers.common["Authorization"] = 'Bearer '+ TOKEN_UNIVERSAL;
             }
 
             if(api == 'Wheater')
             {
                 BASE_URL =   ActionTypes.API_OPEN_WHEATHER + url;
                 heders = {"Accept": "application/json", "Access-Control-Allow-Origin": "*"};
-                //axios.defaults.headers.common["Accept"] = "application/json";
-                //axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
             }
             if(api == 'History')
             {
